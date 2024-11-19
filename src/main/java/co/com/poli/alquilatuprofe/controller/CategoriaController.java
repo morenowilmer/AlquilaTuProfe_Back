@@ -1,7 +1,7 @@
 package co.com.poli.alquilatuprofe.controller;
 
 import co.com.poli.alquilatuprofe.model.commons.GeneralResponse;
-import co.com.poli.alquilatuprofe.model.response.Categoria;
+import co.com.poli.alquilatuprofe.model.commons.Categoria;
 import co.com.poli.alquilatuprofe.service.CategoriaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
