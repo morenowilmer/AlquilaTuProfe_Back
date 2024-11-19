@@ -21,5 +21,6 @@ public class Categoria implements Serializable {
     private String activo;
     private String rutaImagen;
     private String rutaBuscador;
+    private String imagen;
     private List<Categoria> subCategorias;
 }
