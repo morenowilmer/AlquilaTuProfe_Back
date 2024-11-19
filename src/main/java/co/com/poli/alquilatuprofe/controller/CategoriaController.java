@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,7 +27,7 @@ public class CategoriaController {
 
     @ResponseBody
     @GetMapping(value = "/listar", produces = "application/json")
-    public ResponseEntity<GeneralResponse<List<Categoria>>> consultarCategorias() {
+    public ResponseEntity<GeneralResponse<List<Categoria>>> consultarCategorias() throws IOException {
         List<Categoria> categorias = categoriaService.consultarCategorias();
 
         if (Objects.nonNull(categorias) && !categorias.isEmpty()) {
