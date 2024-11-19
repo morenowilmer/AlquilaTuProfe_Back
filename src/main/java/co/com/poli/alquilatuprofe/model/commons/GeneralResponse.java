@@ -19,6 +19,6 @@ public class GeneralResponse <T> {
 
     // Método para crear una respuesta de error
     public static <T> GeneralResponse<T> error(String mensaje) {
-        return new GeneralResponse<>("400", mensaje, null);
+        return new GeneralResponse<>("500", mensaje, null);
     }
 }

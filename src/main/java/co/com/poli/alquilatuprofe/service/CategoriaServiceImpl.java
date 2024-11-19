@@ -1,7 +1,7 @@
 package co.com.poli.alquilatuprofe.service;
 
 import co.com.poli.alquilatuprofe.bd.adapter.CategoriaAdapter;
-import co.com.poli.alquilatuprofe.model.response.Categoria;
+import co.com.poli.alquilatuprofe.model.commons.Categoria;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;

@@ -2,7 +2,7 @@ package co.com.poli.alquilatuprofe.bd.adapter;
 
 import co.com.poli.alquilatuprofe.bd.entities.CategoriaEntity;
 import co.com.poli.alquilatuprofe.bd.repository.CategoriaRepository;
-import co.com.poli.alquilatuprofe.model.response.Categoria;
+import co.com.poli.alquilatuprofe.model.commons.Categoria;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;

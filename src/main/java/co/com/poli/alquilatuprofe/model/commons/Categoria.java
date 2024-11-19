@@ -1,4 +1,4 @@
-package co.com.poli.alquilatuprofe.model.response;
+package co.com.poli.alquilatuprofe.model.commons;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
