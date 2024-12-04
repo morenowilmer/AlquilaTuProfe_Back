@@ -4,5 +4,6 @@ import co.com.poli.alquilatuprofe.model.commons.Usuario;
 
 public interface UsuarioAdapter {
 
-    Usuario consultarUsuario(String tipoIdentificacion, String identificacion, String tipoUsuario);
+    Usuario consultarUsuario(Integer tipoIdentificacion, String identificacion);
+    Usuario registrarUsuario(Usuario usuario);
 }

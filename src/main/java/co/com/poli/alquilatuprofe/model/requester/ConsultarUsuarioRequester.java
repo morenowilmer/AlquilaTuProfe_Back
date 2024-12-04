@@ -13,9 +13,7 @@ import java.io.Serializable;
 public class ConsultarUsuarioRequester implements Serializable {
 
     @NotNull
-    private String tipoIdentificacion;
+    private Integer tipoIdentificacion;
     @NotNull
     private String identificacion;
-    @NotNull
-    private String tipoUsuario;
 }

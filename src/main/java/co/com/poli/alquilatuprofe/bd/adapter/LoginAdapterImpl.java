@@ -18,10 +18,10 @@ public class LoginAdapterImpl implements LoginAdapter{
     }
 
     @Override
-    public Usuario login(String tipoUSuario, String correo, String contrasena, String activo) {
+    public Usuario login(String correo, String contrasena, String activo) {
         ModelMapper mapper = new ModelMapper();
         UsuarioEntity usuario = usuarioRepository
-                .findByTipoUsuarioAndCorreoAndContrasenaAndActivo(tipoUSuario, correo, contrasena, activo);
+                .findByCorreoAndContrasenaAndActivo(correo, contrasena, activo);
 
         return (Objects.nonNull(usuario)) ? mapper.map(usuario, Usuario.class) : null;
     }
