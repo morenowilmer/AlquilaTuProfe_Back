@@ -28,11 +28,11 @@ public class FileUtil {
 
         if (Objects.isNull(rutaImagen) || rutaImagen.isEmpty())
             return null;
-        BufferedImage imagen = ImageIO.read(new File(rutaImagen));
+        BufferedImage imagen = ImageIO.read(new File(rutaImagen.replace("/", File.separator)));
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ImageIO.write(imagen, "png", baos);
-        byte[] imageBytes = baos.toByteArray();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ImageIO.write(imagen, "png", outputStream);
+        byte[] imageBytes = outputStream.toByteArray();
 
         return Base64.getEncoder().encodeToString(imageBytes);
     }

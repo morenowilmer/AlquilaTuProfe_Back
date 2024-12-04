@@ -9,6 +9,7 @@ import co.com.poli.alquilatuprofe.model.requester.LoginRequester;
 import co.com.poli.alquilatuprofe.util.FileUtil;
 import co.com.poli.alquilatuprofe.util.TokenJWT;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +41,7 @@ public class LoginServiceImpl implements LoginService {
         this.httpServletRequest = httpServletRequest;
     }
 
+    @Transactional
     @Override
     public LoginResponse login(LoginRequester requester) throws IOException {
         String contrasena = Base64.getEncoder().encodeToString(requester.getContrasena().getBytes());
