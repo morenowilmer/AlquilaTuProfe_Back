@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.Objects;
 
 @RestController
@@ -24,7 +25,7 @@ public class LoginController {
     @ResponseBody
     @PostMapping("/login")
     public ResponseEntity<GeneralResponse<LoginResponse>> login(
-            @Valid @RequestBody LoginRequester requester) {
+            @Valid @RequestBody LoginRequester requester) throws IOException {
         LoginResponse loginResponse = loginService.login(requester);
 
         if (Objects.nonNull(loginResponse)) {

@@ -15,9 +15,6 @@ public class LoginRequester implements Serializable {
 
     @NotNull
     @NotEmpty
-    private String tipoUsuario;
-    @NotNull
-    @NotEmpty
     private String correo;
     @NotNull
     @NotEmpty

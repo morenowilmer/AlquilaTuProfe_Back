@@ -1,38 +1,54 @@
-package co.com.poli.alquilatuprofe.model.commons;
+package co.com.poli.alquilatuprofe.model.requester;
 
+import co.com.poli.alquilatuprofe.model.commons.TipoDocumento;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class Usuario implements Serializable {
+public class RegistroUsuarioRequester implements Serializable {
 
-    private Integer id;
+    @NotNull
+    @NotEmpty
     private String nombre;
+    @NotNull
+    @NotEmpty
     private String apellido;
+    @NotNull
     private TipoDocumento tipoDocumento;
+    @NotNull
+    @NotEmpty
     private String identificacion;
+    @NotNull
+    @NotEmpty
     private String celular;
+    @NotNull
+    @NotEmpty
     private String correo;
+    @NotNull
+    @NotEmpty
     private String contrasena;
-    private String activo;
+    @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING, timezone = "America/Bogota")
     private Date fechaNacimiento;
+    @NotNull
+    @NotEmpty
     private String departamento;
+    @NotNull
+    @NotEmpty
     private String ciudad;
+    @NotNull
+    @NotEmpty
     private String direccion;
-    private String rutaFoto;
-    private String foto;
-    private Integer nroClases;
-    private Integer nroHorasClases;
-    private List<HojaVida> hojaVidas;
+    @NotNull
+    @NotEmpty
+    private String fotoBase64;
 }

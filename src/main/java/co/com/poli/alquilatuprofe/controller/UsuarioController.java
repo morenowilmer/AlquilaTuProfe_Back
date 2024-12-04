@@ -4,6 +4,7 @@ import co.com.poli.alquilatuprofe.model.commons.GeneralResponse;
 import co.com.poli.alquilatuprofe.model.commons.TipoUsuario;
 import co.com.poli.alquilatuprofe.model.commons.Usuario;
 import co.com.poli.alquilatuprofe.model.requester.ConsultarUsuarioRequester;
+import co.com.poli.alquilatuprofe.model.requester.RegistroUsuarioRequester;
 import co.com.poli.alquilatuprofe.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,19 @@ public class UsuarioController {
 
     public UsuarioController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
+    }
+
+    @ResponseBody
+    @PutMapping("/registrar")
+    public ResponseEntity<GeneralResponse<Usuario>> registrar(
+            @Valid @RequestBody RegistroUsuarioRequester requester) throws Exception {
+        Usuario usuario = usuarioService.registrarUsuario(requester);
+
+        if (Objects.nonNull(usuario)) {
+            return ResponseEntity.ok().body(GeneralResponse.exito(usuario));
+        }
+
+        return ResponseEntity.noContent().build();
     }
 
     @ResponseBody

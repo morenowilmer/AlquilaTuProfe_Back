@@ -6,11 +6,14 @@ import co.com.poli.alquilatuprofe.model.commons.LoginResponse;
 import co.com.poli.alquilatuprofe.model.commons.Sesion;
 import co.com.poli.alquilatuprofe.model.commons.Usuario;
 import co.com.poli.alquilatuprofe.model.requester.LoginRequester;
+import co.com.poli.alquilatuprofe.util.FileUtil;
 import co.com.poli.alquilatuprofe.util.TokenJWT;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.Objects;
@@ -23,6 +26,8 @@ public class LoginServiceImpl implements LoginService {
     private Integer tiempoHoras;
     @Value("${jwt.secret}")
     private String secret;
+    @Value("${imagenes.ruta.base}")
+    private String rutaBaseImagenes;
 
     private final LoginAdapter loginAdapter;
     private final SesionAdapter sesionAdapter;
@@ -36,11 +41,11 @@ public class LoginServiceImpl implements LoginService {
         this.httpServletRequest = httpServletRequest;
     }
 
+    @Transactional
     @Override
-    public LoginResponse login(LoginRequester requester) {
+    public LoginResponse login(LoginRequester requester) throws IOException {
         String contrasena = Base64.getEncoder().encodeToString(requester.getContrasena().getBytes());
-        Usuario usuario = loginAdapter.login(requester.getTipoUsuario(), requester.getCorreo(),
-                contrasena, "S");
+        Usuario usuario = loginAdapter.login(requester.getCorreo(), contrasena, "S");
 
         if (Objects.isNull(usuario)) return null;
 
@@ -65,7 +70,7 @@ public class LoginServiceImpl implements LoginService {
         return LoginResponse.builder()
                 .id(usuario.getId())
                 .nombreCompleto(nombreCompleto)
-                .foto(usuario.getFoto())
+                .foto(FileUtil.obtenerImagen(rutaBaseImagenes.concat(usuario.getRutaFoto())))
                 .token(token)
                 .build();
     }

@@ -4,5 +4,5 @@ import co.com.poli.alquilatuprofe.model.commons.Usuario;
 
 public interface LoginAdapter {
 
-    Usuario login(String tipoUSuario, String correo, String contrasena, String activo);
+    Usuario login(String correo, String contrasena, String activo);
 }

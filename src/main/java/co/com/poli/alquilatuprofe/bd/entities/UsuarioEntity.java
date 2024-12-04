@@ -23,7 +23,6 @@ public class UsuarioEntity implements Serializable {
     @OneToOne
     @JoinColumn(name = "tipo_doc", referencedColumnName = "id", insertable = false, updatable = false)
     private TipoDocumentoEntity tipoDocumento;
-    private String tipoUsuario;
     private String identificacion;
     private String celular;
     private String correo;
