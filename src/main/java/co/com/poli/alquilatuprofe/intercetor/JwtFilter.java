@@ -1,6 +1,7 @@
 package co.com.poli.alquilatuprofe.intercetor;
 
 import co.com.poli.alquilatuprofe.model.commons.Sesion;
+import co.com.poli.alquilatuprofe.model.enums.EnumGenerales;
 import co.com.poli.alquilatuprofe.service.LoginService;
 import co.com.poli.alquilatuprofe.util.TokenJWT;
 import jakarta.servlet.FilterChain;
@@ -45,20 +46,20 @@ public class JwtFilter extends OncePerRequestFilter {
                 String jwtToken = header.substring(7);
 
                 if (!TokenJWT.validateToken(jwtToken))
-                    throw new ServletException("Usuario no autorizado.");
+                    throw new ServletException(EnumGenerales.NO_AUTORIZADO.getValor());
 
                 String subject = TokenJWT.obtenerSubjectToken(jwtToken);
 
                 Sesion sesion = loginService.obtenerSesion(subject);
 
                 if (Objects.isNull(sesion))
-                    throw new ServletException("Usuario no autorizado.");
+                    throw new ServletException(EnumGenerales.NO_AUTORIZADO.getValor());
 
                 validarVigenciaSesion(sesion);
 
                 filterChain.doFilter(request, response);
             } else {
-                throw new ServletException("Usuario no autorizado.");
+                throw new ServletException(EnumGenerales.NO_AUTORIZADO.getValor());
             }
         }
     }
@@ -66,7 +67,7 @@ public class JwtFilter extends OncePerRequestFilter {
     private void validarVigenciaSesion(Sesion sesion) throws ServletException{
         if (sesion.getFechaFin().isBefore(LocalDateTime.now())) {
             loginService.cerrarSesion();
-            throw new ServletException("Sesion expirada.");
+            throw new ServletException(EnumGenerales.SESION_EXPIRADA.getValor());
         }
     }
 }
