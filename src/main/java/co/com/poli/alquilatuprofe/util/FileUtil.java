@@ -19,9 +19,15 @@ public class FileUtil {
         rutaImagen = rutaImagen.replace("/", File.separator);
         ByteArrayInputStream inputStream = new ByteArrayInputStream(imageBytes);
         BufferedImage image = ImageIO.read(inputStream);
+        int newWidth = 200;
+        int newHeight = 150;
+        BufferedImage resizedImage = new BufferedImage(newWidth, newHeight, image.getType());
+        java.awt.Graphics2D g = resizedImage.createGraphics();
+        g.drawImage(image, 0, 0, newWidth, newHeight, null);
+        g.dispose();
         Path path = Paths.get(rutaImagen);
         Files.createDirectories(path.getParent());
-        ImageIO.write(image, "png", path.toFile());
+        ImageIO.write(resizedImage, "png", path.toFile());
     }
 
     public static String obtenerImagen(String rutaImagen) throws IOException {

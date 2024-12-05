@@ -12,10 +12,12 @@ import java.util.Objects;
 public class SesionAdapterImpl implements SesionAdapter {
 
     private final SesionRepository sesionRepository;
-    private final ModelMapper mapper = new ModelMapper();
+    private final ModelMapper mapper;
 
-    public SesionAdapterImpl(SesionRepository sesionRepository) {
+    public SesionAdapterImpl(SesionRepository sesionRepository,
+                             ModelMapper mapper) {
         this.sesionRepository = sesionRepository;
+        this.mapper = mapper;
     }
 
     @Override

@@ -26,12 +26,14 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     private final UsuarioAdapter usuarioAdapter;
     private final HojaVidaAdapter hojaVidaAdapter;
-    private final ModelMapper mapper = new ModelMapper();
+    private final ModelMapper mapper;
 
     public UsuarioServiceImpl(UsuarioAdapter usuarioAdapter,
-                              HojaVidaAdapter hojaVidaAdapter) {
+                              HojaVidaAdapter hojaVidaAdapter,
+                              ModelMapper mapper) {
         this.usuarioAdapter = usuarioAdapter;
         this.hojaVidaAdapter = hojaVidaAdapter;
+        this.mapper = mapper;
     }
 
     @Override

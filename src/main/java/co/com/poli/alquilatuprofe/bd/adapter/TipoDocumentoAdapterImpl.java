@@ -14,14 +14,16 @@ import java.util.List;
 public class TipoDocumentoAdapterImpl implements TipoDocumentoAdapter {
 
     private final TipoDocumentoRepository tipoDocumentoRepository;
+    private final ModelMapper modelMapper;
 
-    public TipoDocumentoAdapterImpl(TipoDocumentoRepository tipoDocumentoRepository) {
+    public TipoDocumentoAdapterImpl(TipoDocumentoRepository tipoDocumentoRepository,
+                                    ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
         this.tipoDocumentoRepository = tipoDocumentoRepository;
     }
 
     @Override
     public List<TipoDocumento> consultarTiposDocumentosActivos() {
-        ModelMapper modelMapper = new ModelMapper();
         List<TipoDocumentoEntity> tiposDocumentos = tipoDocumentoRepository.tiposDocumentosActivos();
         return !tiposDocumentos.isEmpty() ? modelMapper.map(tiposDocumentos, new TypeToken<List<TipoDocumento>>() {}.getType()) :
                 Collections.emptyList();

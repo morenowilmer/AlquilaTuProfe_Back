@@ -12,14 +12,16 @@ import java.util.Objects;
 public class LoginAdapterImpl implements LoginAdapter{
 
     private final UsuarioRepository usuarioRepository;
+    private final ModelMapper mapper;
 
-    public LoginAdapterImpl(UsuarioRepository usuarioRepository) {
+    public LoginAdapterImpl(UsuarioRepository usuarioRepository,
+                            ModelMapper mapper) {
         this.usuarioRepository = usuarioRepository;
+        this.mapper = mapper;
     }
 
     @Override
     public Usuario login(String correo, String contrasena, String activo) {
-        ModelMapper mapper = new ModelMapper();
         UsuarioEntity usuario = usuarioRepository
                 .findByCorreoAndContrasenaAndActivo(correo, contrasena, activo);
 
