@@ -12,10 +12,12 @@ import java.util.Objects;
 public class UsuarioAdapterImpl implements UsuarioAdapter{
 
     private final UsuarioRepository usuarioRepository;
-    private final ModelMapper mapper = new ModelMapper();
+    private final ModelMapper mapper;
 
-    public UsuarioAdapterImpl(UsuarioRepository usuarioRepository) {
+    public UsuarioAdapterImpl(UsuarioRepository usuarioRepository,
+                              ModelMapper mapper) {
         this.usuarioRepository = usuarioRepository;
+        this.mapper = mapper;
     }
 
     @Override
