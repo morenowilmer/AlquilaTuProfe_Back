@@ -1,7 +1,6 @@
 package co.com.poli.alquilatuprofe.intercetor;
 
 import co.com.poli.alquilatuprofe.model.commons.Sesion;
-import co.com.poli.alquilatuprofe.model.enums.EnumGenerales;
 import co.com.poli.alquilatuprofe.service.LoginService;
 import co.com.poli.alquilatuprofe.util.TokenJWT;
 import jakarta.servlet.FilterChain;
@@ -45,29 +44,30 @@ public class JwtFilter extends OncePerRequestFilter {
             if (header != null && header.startsWith("Bearer ")) {
                 String jwtToken = header.substring(7);
 
-                if (!TokenJWT.validateToken(jwtToken))
-                    throw new ServletException(EnumGenerales.NO_AUTORIZADO.getValor());
+                if (!TokenJWT.validateToken(jwtToken)) {
+                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Usuario no autorizado");
+                    return;
+                }
 
                 String subject = TokenJWT.obtenerSubjectToken(jwtToken);
 
                 Sesion sesion = loginService.obtenerSesion(subject);
 
-                if (Objects.isNull(sesion))
-                    throw new ServletException(EnumGenerales.NO_AUTORIZADO.getValor());
+                if (Objects.isNull(sesion)) {
+                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Usuario no autorizado");
+                    return;
+                }
 
-                validarVigenciaSesion(sesion);
+                if (sesion.getFechaFin().isBefore(LocalDateTime.now())) {
+                    loginService.cerrarSesion();
+                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Usuario no autorizado");
+                    return;
+                }
 
                 filterChain.doFilter(request, response);
             } else {
-                throw new ServletException(EnumGenerales.NO_AUTORIZADO.getValor());
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Usuario no autorizado");
             }
-        }
-    }
-
-    private void validarVigenciaSesion(Sesion sesion) throws ServletException{
-        if (sesion.getFechaFin().isBefore(LocalDateTime.now())) {
-            loginService.cerrarSesion();
-            throw new ServletException(EnumGenerales.SESION_EXPIRADA.getValor());
         }
     }
 }
