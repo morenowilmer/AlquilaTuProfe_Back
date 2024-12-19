@@ -34,12 +34,17 @@ public class FileUtil {
 
         if (Objects.isNull(rutaImagen) || rutaImagen.isEmpty())
             return null;
-        BufferedImage imagen = ImageIO.read(new File(rutaImagen.replace("/", File.separator)));
 
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        ImageIO.write(imagen, "png", outputStream);
-        byte[] imageBytes = outputStream.toByteArray();
+        try {
+            BufferedImage imagen = ImageIO.read(new File(rutaImagen.replace("/", File.separator)));
 
-        return Base64.getEncoder().encodeToString(imageBytes);
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            ImageIO.write(imagen, "png", outputStream);
+            byte[] imageBytes = outputStream.toByteArray();
+
+            return Base64.getEncoder().encodeToString(imageBytes);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

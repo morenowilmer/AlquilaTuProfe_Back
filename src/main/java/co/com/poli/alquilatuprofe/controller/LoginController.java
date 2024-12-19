@@ -13,6 +13,7 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/login")
+@CrossOrigin(value = "*")
 @Valid
 public class LoginController {
 
@@ -31,7 +32,7 @@ public class LoginController {
         if (Objects.nonNull(loginResponse)) {
             return ResponseEntity.ok().body(GeneralResponse.exito(loginResponse));
         }
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(401).body(GeneralResponse.error("Credenciales incorrectas"));
     }
 
     @ResponseBody

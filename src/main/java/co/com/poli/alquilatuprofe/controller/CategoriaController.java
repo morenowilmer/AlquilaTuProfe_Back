@@ -16,6 +16,7 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/categorias")
+@CrossOrigin(value = "*")
 @Validated
 public class CategoriaController {
 

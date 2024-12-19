@@ -5,16 +5,14 @@ import co.com.poli.alquilatuprofe.model.commons.TipoDocumento;
 import co.com.poli.alquilatuprofe.service.TipoDocumentoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
 
 @RestController
 @RequestMapping("/persona")
+@CrossOrigin(value = "*")
 @Validated
 public class PersonaController {
 

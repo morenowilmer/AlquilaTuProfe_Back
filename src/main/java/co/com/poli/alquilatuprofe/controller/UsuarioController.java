@@ -17,6 +17,7 @@ import java.util.Objects;
 @Validated
 @RestController
 @RequestMapping("/usuario")
+@CrossOrigin(value = "*")
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
