@@ -67,10 +67,13 @@ public class LoginServiceImpl implements LoginService {
 
         String token = TokenJWT.generateToken(usuario, uuid.toString(), secret, tiempoHoras);
 
+        String rutaImagen = (Objects.nonNull(usuario.getRutaFoto())) ?
+                rutaBaseImagenes.concat(usuario.getRutaFoto()) : null;
         return LoginResponse.builder()
                 .id(usuario.getId())
+                .nombre(usuario.getNombre())
                 .nombreCompleto(nombreCompleto)
-                .foto(FileUtil.obtenerImagen(rutaBaseImagenes.concat(usuario.getRutaFoto())))
+                .foto(FileUtil.obtenerImagen(rutaImagen))
                 .token(token)
                 .build();
     }
